@@ -85,6 +85,25 @@ h1 mark{background:linear-gradient(transparent 55%,var(--jaune) 55%);color:inher
 .urgence{display:inline-block;margin:0 0 10px!important;padding:6px 10px;border-radius:10px;background:var(--rouge);color:#fff!important;font-weight:700;font-size:14px!important;animation:battement 1.6s ease-in-out infinite}
 @keyframes battement{50%{opacity:.75}}
 @media (prefers-reduced-motion:reduce){.urgence{animation:none}}
+/* habillage Gen Z : couleurs franches, autocollants, fond à taches */
+:root{--jaune:#D4FF3A;--jaune-pale:#F3FFD1;--rose:#FF5FA2;--violet:#6C4BFF;--violet-pale:#EEE9FF}
+body{background:radial-gradient(circle at 92% 6%,rgba(255,95,162,.22) 0 120px,transparent 260px),radial-gradient(circle at 4% 38%,rgba(108,75,255,.16) 0 110px,transparent 240px),radial-gradient(circle at 96% 78%,rgba(212,255,58,.35) 0 90px,transparent 220px),#FFF8F0;background-attachment:fixed}
+.etiquette{background:var(--violet);color:#fff;transform:rotate(-2deg)}
+h1 mark{background:linear-gradient(transparent 52%,var(--jaune) 52%)}
+.chip{background:var(--jaune);box-shadow:0 3px 0 var(--encre)}
+.carte{box-shadow:0 6px 0 var(--encre),0 0 0 4px rgba(108,75,255,.0)}
+.btn:hover{background:var(--violet-pale)}
+.suivant{background:var(--violet);border-color:var(--encre);color:#fff;box-shadow:0 4px 0 var(--encre)}
+.suivant:hover{background:#5636F2}
+.cta{background:linear-gradient(135deg,#6C4BFF 0%,#FF5FA2 100%);border:2px solid var(--encre);box-shadow:0 6px 0 var(--encre)}
+.cta p{color:#FFF0F7}
+.cta .mention{color:#FFE3F0}
+.cta a{background:var(--jaune);border:2px solid var(--encre);box-shadow:0 4px 0 var(--encre)}
+.fin-score .gros{background:linear-gradient(90deg,#6C4BFF,#FF5FA2);-webkit-background-clip:text;background-clip:text;color:transparent}
+.verdict b{font-size:22px}
+.alerte{background:var(--encre);color:var(--jaune)}
+.alerte b{color:#fff}
+.urgence{background:var(--encre)!important;color:var(--jaune)!important}
 
 </style>
 </head>
@@ -92,11 +111,11 @@ h1 mark{background:linear-gradient(transparent 55%,var(--jaune) 55%);color:inher
 <p class="alerte" id="alerte" aria-live="off"></p>
 <main class="col">
   <div class="titre-jeu">
-    <p class="etiquette">3 jeux · 1 min chacun</p>
+    <p class="etiquette">3 jeux · 60 s chacun 🎮</p>
     
   </div>
-  <h1>Étudier en Europe : <mark>tu crois tout savoir ?</mark></h1>
-  <p class="chapo">Trois petits jeux, une minute chacun.</p>
+  <h1>Étudier en Europe : <mark>t'es vraiment au courant ?</mark> 👀</h1>
+  <p class="chapo">3 mini-jeux, 1 minute chacun. Bonne chance 🍀</p>
   
   <div class="btns" style="margin-top:20px"><a class="btn" style="justify-content:flex-start;min-height:76px;text-decoration:none;color:inherit" href="vrai-ou-faux/"><span class="emo" aria-hidden="true">✅</span><span style="text-align:left"><b style="display:block;font-size:18px">Vrai ou faux</b><span style="font-weight:500;font-size:15px;color:var(--encre-2)">6 affirmations sur les études en Europe. Tu fais combien ?</span></span></a><a class="btn" style="justify-content:flex-start;min-height:76px;text-decoration:none;color:inherit" href="devine-le-pays/"><span class="emo" aria-hidden="true">🌍</span><span style="text-align:left"><b style="display:block;font-size:18px">Devine le pays</b><span style="font-weight:500;font-size:15px;color:var(--encre-2)">Retrouve le pays d'Europe à partir de ses règles d'études.</span></span></a><a class="btn" style="justify-content:flex-start;min-height:76px;text-decoration:none;color:inherit" href="plus-tot-plus-tard/"><span class="emo" aria-hidden="true">⏳</span><span style="text-align:left"><b style="display:block;font-size:18px">Plus tôt ou plus tard</b><span style="font-weight:500;font-size:15px;color:var(--encre-2)">5 duels de dates limites de candidature pour la rentrée 2027.</span></span></a></div>
   <p class="note">Dates et règles relevées sur les sites officiels pour la rentrée 2027. Vérifie toujours la source avant d'envoyer un dossier.</p>
@@ -146,6 +165,9 @@ var Jeu=(function(){
     return '<p class="urgence">⏳ Plus que '+(j<1?'quelques heures':j+' jour'+(j>1?'s':''))+' : '+esc(e.q.charAt(0).toLowerCase()+e.q.slice(1))+' ferment le '+esc(e.j)+'.</p>';
   }
 
+  var BRAVO=["Masterclass 🔥","Aura +1000 ✨","Trop fort, no cap 🧠","T'as slay 💅","Validé 😮‍💨"], RATE=["Raté chef 💀","Aïe aïe aïe 😭","Nan mais allô 📞","Pas ouf ça 😬","Le flop 🫠"];
+  function pioche(t){ return t[Math.floor(Math.random()*t.length)]; }
+
   function vibre(ms){ try{ if(!calme && navigator.vibrate){ navigator.vibrate(ms); } }catch(e){} }
 
   // Confettis légers, dessinés sur un canvas plein écran puis effacés
@@ -165,7 +187,7 @@ var Jeu=(function(){
   var etat={score:0,serie:0,meilleure:0,tour:0,total:0,resultats:[]};
   function chips(){
     var s=document.getElementById("score"), f=document.getElementById("serie");
-    if(s){ s.textContent=etat.score+" pts"; }
+    if(s){ s.textContent="✨ "+etat.score+" aura"; }
     if(f){ f.textContent="🔥 "+etat.serie; f.parentNode.hidden=etat.serie<2; }
   }
   function pop(id){ var el=document.getElementById(id); if(el){ el.classList.remove("pop"); void el.offsetWidth; el.classList.add("pop"); } }
@@ -190,7 +212,7 @@ var Jeu=(function(){
     var mot=ratio>=.99?o.mots[0]:ratio>=.6?o.mots[1]:o.mots[2];
     var h='<div class="ecran"><div class="carte fin-score"><p class="num">'+esc(o.surScore)+'</p><p class="gros">'+bons+'/'+etat.total+'</p>'+
       '<p class="etoiles" aria-label="'+bons+' bonnes réponses sur '+etat.total+'">'+et+'</p><p class="mot">'+esc(mot)+'</p>'+
-      '<p class="num" style="margin-top:6px">'+etat.score+' points'+(etat.meilleure>=3?' · série de '+etat.meilleure+' 🔥':'')+'</p></div>'+
+      '<p class="num" style="margin-top:6px">'+etat.score+' aura'+(etat.meilleure>=3?' · série de '+etat.meilleure+' 🔥':'')+'</p></div>'+
       '<div class="cta">'+urgence()+'<h3>'+esc(o.ctaTitre)+'</h3><p>'+esc(o.ctaTexte)+'</p>'+
       '<a href="'+lienTest(o.campagne,o.contenu)+'">'+esc(o.ctaBouton)+' <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11M10.5 5l5 5-5 5"/></svg></a>'+
       '<p class="mention">Test gratuit proposé par kursiko.com · accès par un code envoyé par e-mail</p></div>'+
@@ -207,7 +229,7 @@ var Jeu=(function(){
     barre();
   }
 
-  return {bandeau:bandeau,joursAvant:function(t){return Math.floor((Date.parse(t)-Date.now())/864e5);},esc:esc,melange:melange,depart:depart,reponse:reponse,suivant:suivant,fin:fin,etat:function(){return etat;},confettis:confettis};
+  return {bravo:function(){return pioche(BRAVO);},rate:function(){return pioche(RATE);},bandeau:bandeau,joursAvant:function(t){return Math.floor((Date.parse(t)-Date.now())/864e5);},esc:esc,melange:melange,depart:depart,reponse:reponse,suivant:suivant,fin:fin,etat:function(){return etat;},confettis:confettis};
 })();
 
 </script>

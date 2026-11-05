@@ -104,6 +104,8 @@ h1 mark{background:linear-gradient(transparent 52%,var(--jaune) 52%)}
 .alerte{background:var(--encre);color:var(--jaune)}
 .alerte b{color:#fff}
 .urgence{background:var(--encre)!important;color:var(--jaune)!important}
+.raccourci{margin:8px 0 0;font-size:15px;font-weight:700}
+.raccourci a{color:var(--violet);text-underline-offset:3px}
 
 </style>
 </head>
@@ -111,13 +113,14 @@ h1 mark{background:linear-gradient(transparent 52%,var(--jaune) 52%)}
 <p class="alerte" id="alerte" aria-live="off"></p>
 <main class="col">
   <div class="titre-jeu">
-    <p class="etiquette">3 jeux · 60 s chacun 🎮</p>
+    <p class="etiquette">3 jeux · 30 s chacun 🎮</p>
     
   </div>
   <h1>Étudier en Europe : <mark>t'es vraiment au courant ?</mark> 👀</h1>
-  <p class="chapo">3 mini-jeux, 1 minute chacun. Bonne chance 🍀</p>
+  <p class="chapo">3 mini-jeux de 30 secondes. Bonne chance 🍀</p>
+  <p class="raccourci"><a id="direct" href="https://kursiko.com/test">Pas le temps ? Direct à tes écoles →</a></p>
   
-  <div class="btns" style="margin-top:20px"><a class="btn" style="justify-content:flex-start;min-height:76px;text-decoration:none;color:inherit" href="vrai-ou-faux/"><span class="emo" aria-hidden="true">✅</span><span style="text-align:left"><b style="display:block;font-size:18px">Vrai ou faux</b><span style="font-weight:500;font-size:15px;color:var(--encre-2)">6 affirmations sur les études en Europe. Tu fais combien ?</span></span></a><a class="btn" style="justify-content:flex-start;min-height:76px;text-decoration:none;color:inherit" href="devine-le-pays/"><span class="emo" aria-hidden="true">🌍</span><span style="text-align:left"><b style="display:block;font-size:18px">Devine le pays</b><span style="font-weight:500;font-size:15px;color:var(--encre-2)">Retrouve le pays d'Europe à partir de ses règles d'études.</span></span></a><a class="btn" style="justify-content:flex-start;min-height:76px;text-decoration:none;color:inherit" href="plus-tot-plus-tard/"><span class="emo" aria-hidden="true">⏳</span><span style="text-align:left"><b style="display:block;font-size:18px">Plus tôt ou plus tard</b><span style="font-weight:500;font-size:15px;color:var(--encre-2)">5 duels de dates limites de candidature pour la rentrée 2027.</span></span></a></div>
+  <div class="btns" style="margin-top:20px"><a class="btn" style="justify-content:flex-start;min-height:76px;text-decoration:none;color:inherit" href="vrai-ou-faux/"><span class="emo" aria-hidden="true">✅</span><span style="text-align:left"><b style="display:block;font-size:18px">Vrai ou faux</b><span style="font-weight:500;font-size:15px;color:var(--encre-2)">3 affirmations sur les études en Europe. Tu fais combien ?</span></span></a><a class="btn" style="justify-content:flex-start;min-height:76px;text-decoration:none;color:inherit" href="devine-le-pays/"><span class="emo" aria-hidden="true">🌍</span><span style="text-align:left"><b style="display:block;font-size:18px">Devine le pays</b><span style="font-weight:500;font-size:15px;color:var(--encre-2)">Retrouve le pays d'Europe à partir de ses règles d'études.</span></span></a><a class="btn" style="justify-content:flex-start;min-height:76px;text-decoration:none;color:inherit" href="plus-tot-plus-tard/"><span class="emo" aria-hidden="true">⏳</span><span style="text-align:left"><b style="display:block;font-size:18px">Plus tôt ou plus tard</b><span style="font-weight:500;font-size:15px;color:var(--encre-2)">3 duels de dates limites de candidature pour la rentrée 2027.</span></span></a></div>
   <p class="note">Dates et règles relevées sur les sites officiels pour la rentrée 2027. Vérifie toujours la source avant d'envoyer un dossier.</p>
 </main>
 <script>
@@ -152,6 +155,9 @@ var Jeu=(function(){
     function d(v){ return (v<10?"0":"")+v; }
     return '<b>'+j+'</b> j <b>'+d(h)+'</b> h <b>'+d(m)+'</b> min <b>'+d(x)+'</b> s';
   }
+  // Lien « direct au test » : même suivi que le bouton de fin, marqué raccourci
+  function raccourci(campagne){ var a=document.getElementById("direct"); if(a){ a.href=lienTest(campagne,"raccourci"); } }
+
   // Bandeau collé en haut : la prochaine vraie date limite, à la seconde près
   function bandeau(){
     var e=prochaine(), el=document.getElementById("alerte"); if(!e||!el){ if(el){ el.hidden=true; } return; }
@@ -229,12 +235,12 @@ var Jeu=(function(){
     barre();
   }
 
-  return {bravo:function(){return pioche(BRAVO);},rate:function(){return pioche(RATE);},bandeau:bandeau,joursAvant:function(t){return Math.floor((Date.parse(t)-Date.now())/864e5);},esc:esc,melange:melange,depart:depart,reponse:reponse,suivant:suivant,fin:fin,etat:function(){return etat;},confettis:confettis};
+  return {raccourci:raccourci,bravo:function(){return pioche(BRAVO);},rate:function(){return pioche(RATE);},bandeau:bandeau,joursAvant:function(t){return Math.floor((Date.parse(t)-Date.now())/864e5);},esc:esc,melange:melange,depart:depart,reponse:reponse,suivant:suivant,fin:fin,etat:function(){return etat;},confettis:confettis};
 })();
 
 </script>
 <script>
-
+Jeu.raccourci("jeux-accueil");
 Jeu.bandeau();
 </script>
 </body>

@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#FBF7EF">
 <title>Vrai ou faux : les études en Europe</title>
-<meta name="description" content="6 affirmations sur les études en Europe. Tu fais combien ?">
+<meta name="description" content="3 affirmations sur les études en Europe. Tu fais combien ?">
 <meta property="og:title" content="Vrai ou faux : les études en Europe">
-<meta property="og:description" content="6 affirmations sur les études en Europe. Tu fais combien ?">
+<meta property="og:description" content="3 affirmations sur les études en Europe. Tu fais combien ?">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23FFE066'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle'%3E%E2%9C%85%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -104,6 +104,8 @@ h1 mark{background:linear-gradient(transparent 52%,var(--jaune) 52%)}
 .alerte{background:var(--encre);color:var(--jaune)}
 .alerte b{color:#fff}
 .urgence{background:var(--encre)!important;color:var(--jaune)!important}
+.raccourci{margin:8px 0 0;font-size:15px;font-weight:700}
+.raccourci a{color:var(--violet);text-underline-offset:3px}
 
 </style>
 </head>
@@ -111,11 +113,12 @@ h1 mark{background:linear-gradient(transparent 52%,var(--jaune) 52%)}
 <p class="alerte" id="alerte" aria-live="off"></p>
 <main class="col">
   <div class="titre-jeu">
-    <p class="etiquette">Vrai ou fake · 60 s ⏱️</p>
+    <p class="etiquette">Vrai ou fake · 20 s ⏱️</p>
     <div class="compteurs"><span class="chip" id="score">0 pts</span><span class="chip" hidden><span id="serie">🔥 0</span></span></div>
   </div>
   <h1>Vrai ou fake : <mark>t'es chaud ?</mark> 🔥</h1>
-  <p class="chapo">6 phrases sur les études en Europe. Zéro piège, que du vrai.</p>
+  <p class="chapo">3 phrases sur les études en Europe. Zéro piège, que du vrai.</p>
+  <p class="raccourci"><a id="direct" href="https://kursiko.com/test">Pas le temps ? Direct à tes écoles →</a></p>
   <div class="barre" id="barre" aria-hidden="true"></div>
   <div class="scene" id="scene" aria-live="polite"></div>
   <p class="note">Dates et règles relevées sur les sites officiels pour la rentrée 2027. Vérifie toujours la source avant d'envoyer un dossier.</p>
@@ -152,6 +155,9 @@ var Jeu=(function(){
     function d(v){ return (v<10?"0":"")+v; }
     return '<b>'+j+'</b> j <b>'+d(h)+'</b> h <b>'+d(m)+'</b> min <b>'+d(x)+'</b> s';
   }
+  // Lien « direct au test » : même suivi que le bouton de fin, marqué raccourci
+  function raccourci(campagne){ var a=document.getElementById("direct"); if(a){ a.href=lienTest(campagne,"raccourci"); } }
+
   // Bandeau collé en haut : la prochaine vraie date limite, à la seconde près
   function bandeau(){
     var e=prochaine(), el=document.getElementById("alerte"); if(!e||!el){ if(el){ el.hidden=true; } return; }
@@ -229,7 +235,7 @@ var Jeu=(function(){
     barre();
   }
 
-  return {bravo:function(){return pioche(BRAVO);},rate:function(){return pioche(RATE);},bandeau:bandeau,joursAvant:function(t){return Math.floor((Date.parse(t)-Date.now())/864e5);},esc:esc,melange:melange,depart:depart,reponse:reponse,suivant:suivant,fin:fin,etat:function(){return etat;},confettis:confettis};
+  return {raccourci:raccourci,bravo:function(){return pioche(BRAVO);},rate:function(){return pioche(RATE);},bandeau:bandeau,joursAvant:function(t){return Math.floor((Date.parse(t)-Date.now())/864e5);},esc:esc,melange:melange,depart:depart,reponse:reponse,suivant:suivant,fin:fin,etat:function(){return etat;},confettis:confettis};
 })();
 
 </script>
@@ -245,10 +251,10 @@ var Jeu=(function(){
     {q:"🇪🇸 En Espagne, tout le monde candidate sur un seul portail national.",v:false,e:"Faux : tu candidates sur le portail de la région de l'école. UNEDasiss sert seulement à faire reconnaître tes notes.",s:["UNEDasiss","https://unedasiss.uned.es/publico_destino"]},
     {q:"🇩🇰 Au Danemark, le portail ferme le 15 mars à midi.",v:true,e:"Vrai : sur optagelse.dk, du 1er février au 15 mars 2027 à midi, pour un diplôme non danois.",s:["optagelse.dk","https://optagelse.dk/higher-education.shtml"]}
   ];
-  var N=6, serie=[], scene=document.getElementById("scene");
+  var N=3, serie=[], scene=document.getElementById("scene");
 
   function accueil(){
-    scene.innerHTML='<div class="ecran"><div class="carte"><p class="grand">6 phrases sur les études en Europe. Vrai ou fake ? 🤔</p>'+
+    scene.innerHTML='<div class="ecran"><div class="carte"><p class="grand">3 phrases sur les études en Europe. Vrai ou fake ? 🤔</p>'+
       '<p class="num" style="margin-top:8px">+10 aura par bonne réponse. 3 d\'affilée = bonus 🔥</p>'+
       '<div class="btns"><button type="button" class="btn suivant" id="go">Let\'s go 🚀</button></div></div></div>';
     document.getElementById("go").addEventListener("click",partie);
@@ -275,7 +281,7 @@ var Jeu=(function(){
       ctaTitre:"OK. Et TES écoles, tu les connais ? 👀",ctaTexte:"Un test de 10 minutes classe les écoles d'Europe selon tes réponses, avec leurs dates limites.",
       ctaBouton:"Je veux mes écoles 🚀",campagne:"jeu-vrai-faux",defi:"J'ai fait {n}/{t} au vrai ou fake des études en Europe 🔥 T'es chaud de faire mieux ?",rejouer:partie});
   }
-  Jeu.depart(N); accueil();
+  Jeu.raccourci("jeu-vrai-faux"); Jeu.depart(N); accueil();
 })();
 
 Jeu.bandeau();

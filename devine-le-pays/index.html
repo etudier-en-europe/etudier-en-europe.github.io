@@ -104,6 +104,8 @@ h1 mark{background:linear-gradient(transparent 52%,var(--jaune) 52%)}
 .alerte{background:var(--encre);color:var(--jaune)}
 .alerte b{color:#fff}
 .urgence{background:var(--encre)!important;color:var(--jaune)!important}
+.raccourci{margin:8px 0 0;font-size:15px;font-weight:700}
+.raccourci a{color:var(--violet);text-underline-offset:3px}
 
 </style>
 </head>
@@ -111,11 +113,12 @@ h1 mark{background:linear-gradient(transparent 52%,var(--jaune) 52%)}
 <p class="alerte" id="alerte" aria-live="off"></p>
 <main class="col">
   <div class="titre-jeu">
-    <p class="etiquette">Devinette · 2 min 🕵️</p>
+    <p class="etiquette">Devinette · 30 s 🕵️</p>
     <div class="compteurs"><span class="chip" id="score">0 pts</span><span class="chip" hidden><span id="serie">🔥 0</span></span></div>
   </div>
   <h1>POV : <mark>devine le pays</mark> 🌍</h1>
   <p class="chapo">Chaque pays se cache derrière ses règles d'études. Moins t'as besoin d'indices, plus t'as d'aura.</p>
+  <p class="raccourci"><a id="direct" href="https://kursiko.com/test">Pas le temps ? Direct à tes écoles →</a></p>
   <div class="barre" id="barre" aria-hidden="true"></div>
   <div class="scene" id="scene" aria-live="polite"></div>
   <p class="note">Dates et règles relevées sur les sites officiels pour la rentrée 2027. Vérifie toujours la source avant d'envoyer un dossier.</p>
@@ -152,6 +155,9 @@ var Jeu=(function(){
     function d(v){ return (v<10?"0":"")+v; }
     return '<b>'+j+'</b> j <b>'+d(h)+'</b> h <b>'+d(m)+'</b> min <b>'+d(x)+'</b> s';
   }
+  // Lien « direct au test » : même suivi que le bouton de fin, marqué raccourci
+  function raccourci(campagne){ var a=document.getElementById("direct"); if(a){ a.href=lienTest(campagne,"raccourci"); } }
+
   // Bandeau collé en haut : la prochaine vraie date limite, à la seconde près
   function bandeau(){
     var e=prochaine(), el=document.getElementById("alerte"); if(!e||!el){ if(el){ el.hidden=true; } return; }
@@ -229,7 +235,7 @@ var Jeu=(function(){
     barre();
   }
 
-  return {bravo:function(){return pioche(BRAVO);},rate:function(){return pioche(RATE);},bandeau:bandeau,joursAvant:function(t){return Math.floor((Date.parse(t)-Date.now())/864e5);},esc:esc,melange:melange,depart:depart,reponse:reponse,suivant:suivant,fin:fin,etat:function(){return etat;},confettis:confettis};
+  return {raccourci:raccourci,bravo:function(){return pioche(BRAVO);},rate:function(){return pioche(RATE);},bandeau:bandeau,joursAvant:function(t){return Math.floor((Date.parse(t)-Date.now())/864e5);},esc:esc,melange:melange,depart:depart,reponse:reponse,suivant:suivant,fin:fin,etat:function(){return etat;},confettis:confettis};
 })();
 
 </script>
@@ -246,10 +252,10 @@ var Jeu=(function(){
     {n:"Belgique",a:"la Belgique",d:"🇧🇪",i:["Pas de portail national : on candidate auprès de chaque école.","On y étudie en français ou en néerlandais, selon la région.","Sa capitale : Bruxelles."]},
     {n:"Espagne",a:"l'Espagne",d:"🇪🇸",i:["On candidate sur le portail de la région de l'école.","UNEDasiss y fait reconnaître les notes des élèves étrangers.","Sa capitale : Madrid."]}
   ];
-  var N=5, POINTS=[30,20,10], serie=[], scene=document.getElementById("scene");
+  var N=3, POINTS=[30,20,10], serie=[], scene=document.getElementById("scene");
 
   function accueil(){
-    scene.innerHTML='<div class="ecran"><div class="carte"><p class="grand">5 pays à deviner à partir d\'indices sur leurs études.</p>'+
+    scene.innerHTML='<div class="ecran"><div class="carte"><p class="grand">3 pays à deviner à partir d\'indices sur leurs études.</p>'+
       '<p class="num" style="margin-top:8px">1 indice = 30 aura. 2 indices = 20. 3 indices = 10. Choisis bien 😏</p>'+
       '<div class="btns"><button type="button" class="btn suivant" id="go">Let\'s go 🚀</button></div></div></div>';
     document.getElementById("go").addEventListener("click",partie);
@@ -285,7 +291,7 @@ var Jeu=(function(){
       ctaTitre:"Et TON pays, c'est lequel ? 🌍",ctaTexte:"Un test de 10 minutes classe les écoles d'Europe selon tes réponses, avec leurs dates limites.",
       ctaBouton:"Trouver mon match 🎯",campagne:"jeu-devine-pays",defi:"J'ai deviné {n}/{t} pays d'Europe rien qu'avec leurs règles d'études 🌍 À toi de jouer !",rejouer:partie});
   }
-  Jeu.depart(N); accueil();
+  Jeu.raccourci("jeu-devine-pays"); Jeu.depart(N); accueil();
 })();
 
 Jeu.bandeau();

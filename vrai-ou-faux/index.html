@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FBF7EF">
+<title>Vrai ou faux : les études en Europe</title>
+<meta name="description" content="6 affirmations sur les études en Europe. Tu fais combien ?">
+<meta property="og:title" content="Vrai ou faux : les études en Europe">
+<meta property="og:description" content="6 affirmations sur les études en Europe. Tu fais combien ?">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23FFE066'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle'%3E%E2%9C%85%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+[hidden]{display:none!important}
+:root{--papier:#FBF7EF;--carte:#FFFFFF;--encre:#1F1D1A;--encre-2:#5C574F;--trait:#E7DFD0;--jaune:#FFE066;--jaune-pale:#FFF6CC;--vert:#1E8E5A;--vert-pale:#DDF5E8;--rouge:#C2412D;--rouge-pale:#FCE3DE;--bleu:#2F4FD8}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--papier);color:var(--encre);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100dvh;overflow-x:hidden}
+:focus-visible{outline:3px solid var(--bleu);outline-offset:3px}
+button{font:inherit;color:inherit}
+.col{max-width:520px;margin:0 auto;padding:calc(16px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-left,0px)) calc(28px + env(safe-area-inset-bottom,0px))}
+.titre-jeu{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.etiquette{display:inline-flex;align-items:center;gap:6px;margin:0;padding:5px 11px;border-radius:999px;background:var(--encre);color:var(--papier);font-size:14px;font-weight:700}
+.compteurs{display:flex;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:4px;min-height:32px;padding:4px 10px;border-radius:999px;background:var(--carte);border:2px solid var(--encre);font-weight:800;font-size:15px;font-variant-numeric:tabular-nums}
+.chip.pop{animation:pop .35s ease}
+@keyframes pop{40%{transform:scale(1.25)}}
+h1,h2,h3{font-family:"Bricolage Grotesque",Inter,sans-serif;font-weight:800;letter-spacing:-.02em;text-wrap:balance}
+h1{margin:14px 0 0;font-size:clamp(32px,9vw,44px);line-height:1.02}
+h1 mark{background:linear-gradient(transparent 55%,var(--jaune) 55%);color:inherit;padding:0 2px}
+.chapo{margin:10px 0 0;font-size:17px;color:var(--encre-2)}
+.barre{display:flex;gap:5px;margin:18px 0 0}
+.barre i{flex:1;height:7px;border-radius:4px;background:var(--trait);transition:background .25s ease}
+.barre i.bon{background:var(--vert)}
+.barre i.faux{background:var(--rouge)}
+.barre i.ici{background:var(--encre)}
+.scene{margin-top:16px}
+.ecran{animation:entre .32s ease both}
+@keyframes entre{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.carte{position:relative;background:var(--carte);border:2px solid var(--encre);border-radius:24px;padding:22px 18px;box-shadow:0 6px 0 var(--encre)}
+.carte.secoue{animation:secoue .4s ease}
+@keyframes secoue{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.num{margin:0;font-size:14px;font-weight:700;color:var(--encre-2)}
+.grand{margin:6px 0 0;font-family:"Bricolage Grotesque",Inter,sans-serif;font-weight:800;font-size:clamp(24px,6.6vw,30px);line-height:1.12;letter-spacing:-.01em}
+.btns{display:grid;gap:10px;margin-top:16px}
+.btns.deux{grid-template-columns:1fr 1fr}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:60px;padding:12px 14px;border:2px solid var(--encre);border-radius:18px;background:var(--carte);font-weight:700;font-size:17px;cursor:pointer;box-shadow:0 4px 0 var(--encre);transition:transform .1s ease,box-shadow .1s ease,background .15s ease;text-align:center}
+.btn:hover{background:var(--jaune-pale)}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--encre)}
+.btn .emo{font-size:24px;line-height:1}
+.btn.bon{background:var(--vert-pale);border-color:var(--vert);box-shadow:0 4px 0 var(--vert)}
+.btn.faux{background:var(--rouge-pale);border-color:var(--rouge);box-shadow:0 4px 0 var(--rouge)}
+.btn[disabled]{cursor:default}
+.btn[disabled]:not(.bon):not(.faux){opacity:.45}
+.verdict{margin-top:14px;padding:14px 16px;border-radius:18px;font-size:16px;animation:entre .25s ease both}
+.verdict b{display:block;font-family:"Bricolage Grotesque",Inter,sans-serif;font-size:20px;font-weight:800}
+.verdict.bon{background:var(--vert-pale)}
+.verdict.faux{background:var(--rouge-pale)}
+.verdict .src{display:inline-block;margin-top:6px;font-size:14px;font-weight:600;color:var(--bleu);text-underline-offset:3px}
+.suivant{width:100%;margin-top:12px;background:var(--encre);color:var(--papier);border-color:var(--encre);box-shadow:0 4px 0 #000}
+.suivant:hover{background:#000}
+.fin-score{text-align:center}
+.fin-score .gros{margin:6px 0 0;font-family:"Bricolage Grotesque",Inter,sans-serif;font-weight:800;font-size:64px;line-height:1;font-variant-numeric:tabular-nums}
+.fin-score .etoiles{margin:6px 0 0;font-size:30px;letter-spacing:4px}
+.fin-score .mot{margin:8px 0 0;font-size:18px;font-weight:700}
+.cta{margin-top:16px;background:var(--encre);color:var(--papier);border-radius:24px;padding:20px 18px 16px}
+.cta h3{margin:0;font-size:24px;line-height:1.12}
+.cta p{margin:6px 0 0;color:#D9D3C7;font-size:15px}
+.cta a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:58px;margin-top:14px;padding:14px 22px;border-radius:999px;background:var(--jaune);color:var(--encre);font-weight:800;font-size:18px;text-decoration:none;animation:appel 2.4s ease-in-out 1s infinite}
+@keyframes appel{0%,100%{transform:none}8%{transform:scale(1.04)}16%{transform:none}}
+.cta a svg{width:20px;height:20px}
+.cta .mention{margin:10px 0 0;font-size:14px;color:#BDB6A8;text-align:center}
+.lien-bas{display:flex;justify-content:center;gap:18px;margin-top:14px}
+.lien-bas button,.lien-bas a{padding:10px 6px;border:0;background:none;color:var(--encre-2);font-weight:600;font-size:15px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.note{margin:18px 0 0;font-size:14px;color:var(--encre-2)}
+#confettis{position:fixed;inset:0;pointer-events:none;z-index:50}
+@media (prefers-reduced-motion:reduce){.ecran,.verdict,.chip.pop,.carte.secoue,.cta a{animation:none}.btn,.barre i{transition:none}}
+.fin-score .gros:focus{outline:none}
+.alerte{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:center;gap:8px;margin:0;padding:calc(8px + env(safe-area-inset-top,0px)) 14px 8px;background:var(--rouge);color:#fff;font-size:14px;font-weight:600;line-height:1.35;text-align:center}
+.alerte .decompte{font-variant-numeric:tabular-nums;white-space:nowrap}
+.alerte b{font-weight:800}
+.alerte + .col{padding-top:14px}
+.urgence{display:inline-block;margin:0 0 10px!important;padding:6px 10px;border-radius:10px;background:var(--rouge);color:#fff!important;font-weight:700;font-size:14px!important;animation:battement 1.6s ease-in-out infinite}
+@keyframes battement{50%{opacity:.75}}
+@media (prefers-reduced-motion:reduce){.urgence{animation:none}}
+
+</style>
+</head>
+<body>
+<p class="alerte" id="alerte" aria-live="off"></p>
+<main class="col">
+  <div class="titre-jeu">
+    <p class="etiquette">Vrai ou faux · 1 min</p>
+    <div class="compteurs"><span class="chip" id="score">0 pts</span><span class="chip" hidden><span id="serie">🔥 0</span></span></div>
+  </div>
+  <h1>Vrai ou faux : <mark>les études en Europe</mark></h1>
+  <p class="chapo">6 affirmations, 1 minute. Tu fais combien ?</p>
+  <div class="barre" id="barre" aria-hidden="true"></div>
+  <div class="scene" id="scene" aria-live="polite"></div>
+  <p class="note">Dates et règles relevées sur les sites officiels pour la rentrée 2027. Vérifie toujours la source avant d'envoyer un dossier.</p>
+</main>
+<script>
+// Moteur commun aux trois jeux : score, série, confettis, écran de fin et lien suivi vers le test
+var Jeu=(function(){
+  var calme=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var compte="";
+  try{ compte=(new URLSearchParams(location.search).get("c")||"").toLowerCase().replace(/[^a-z0-9_-]/g,"").slice(0,40); }catch(e){}
+
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(x){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[x];}); }
+  function melange(t){ t=t.slice(); for(var i=t.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)), x=t[i]; t[i]=t[j]; t[j]=x; } return t; }
+  function lienTest(campagne,contenu){
+    var u=new URL("https://kursiko.com/test");
+    u.searchParams.set("utm_source",compte||"direct"); u.searchParams.set("utm_medium","social"); u.searchParams.set("utm_campaign",campagne);
+    if(contenu){ u.searchParams.set("utm_content",contenu); }
+    return u.toString();
+  }
+  // Vraies dates limites de la rentrée 2027 (content/pays). Heure officielle quand elle est connue,
+  // sinon le début de la journée : le compte à rebours ne promet jamais plus de temps qu'il n'en reste.
+  var ECHEANCES=[
+    {q:"Les candidatures au Royaume-Uni (UCAS)",t:"2027-01-13T18:00:00Z",j:"13 janvier"},
+    {q:"Les formations à places limitées aux Pays-Bas",t:"2027-01-14T23:00:00Z",j:"15 janvier"},
+    {q:"Les candidatures du premier tour en Suède",t:"2027-01-14T23:00:00Z",j:"15 janvier"},
+    {q:"Les candidatures en anglais en Finlande",t:"2027-01-20T22:00:00Z",j:"21 janvier"},
+    {q:"Les candidatures en Irlande (CAO)",t:"2027-02-01T17:00:00Z",j:"1er février"},
+    {q:"Les candidatures au Danemark",t:"2027-03-15T11:00:00Z",j:"15 mars"},
+    {q:"Les candidatures aux Pays-Bas",t:"2027-04-30T22:00:00Z",j:"1er mai"}
+  ];
+  function prochaine(){ var n=Date.now(); for(var i=0;i<ECHEANCES.length;i++){ if(Date.parse(ECHEANCES[i].t)>n){ return ECHEANCES[i]; } } return null; }
+  function reste(e){
+    var s=Math.max(0,Math.floor((Date.parse(e.t)-Date.now())/1000)), j=Math.floor(s/86400), h=Math.floor(s%86400/3600), m=Math.floor(s%3600/60), x=s%60;
+    function d(v){ return (v<10?"0":"")+v; }
+    return '<b>'+j+'</b> j <b>'+d(h)+'</b> h <b>'+d(m)+'</b> min <b>'+d(x)+'</b> s';
+  }
+  // Bandeau collé en haut : la prochaine vraie date limite, à la seconde près
+  function bandeau(){
+    var e=prochaine(), el=document.getElementById("alerte"); if(!e||!el){ if(el){ el.hidden=true; } return; }
+    function maj(){ el.innerHTML='<span aria-hidden="true">⏳</span><span>'+esc(e.q)+' ferment le '+esc(e.j)+' : <span class="decompte">'+reste(e)+'</span></span>'; }
+    maj(); if(!calme){ setInterval(maj,1000); }
+  }
+
+  function urgence(){
+    var e=prochaine(); if(!e){ return ''; }
+    var j=Math.floor((Date.parse(e.t)-Date.now())/864e5);
+    return '<p class="urgence">⏳ Plus que '+(j<1?'quelques heures':j+' jour'+(j>1?'s':''))+' : '+esc(e.q.charAt(0).toLowerCase()+e.q.slice(1))+' ferment le '+esc(e.j)+'.</p>';
+  }
+
+  function vibre(ms){ try{ if(!calme && navigator.vibrate){ navigator.vibrate(ms); } }catch(e){} }
+
+  // Confettis légers, dessinés sur un canvas plein écran puis effacés
+  function confettis(n){
+    if(calme){ return; }
+    var c=document.getElementById("confettis"); if(!c){ c=document.createElement("canvas"); c.id="confettis"; document.body.appendChild(c); }
+    var x=c.getContext("2d"), w=c.width=innerWidth, h=c.height=innerHeight, cols=["#FFE066","#1E8E5A","#2F4FD8","#C2412D","#1F1D1A"], p=[];
+    for(var i=0;i<(n||60);i++){ p.push({x:w/2+(Math.random()-.5)*w*.4,y:h*.35,vx:(Math.random()-.5)*9,vy:-Math.random()*9-3,r:Math.random()*6+4,c:cols[i%cols.length],a:Math.random()*6}); }
+    var t=0;(function boucle(){
+      x.clearRect(0,0,w,h); t++;
+      p.forEach(function(q){ q.vy+=.32; q.x+=q.vx; q.y+=q.vy; q.a+=.2; x.save(); x.translate(q.x,q.y); x.rotate(q.a); x.fillStyle=q.c; x.fillRect(-q.r/2,-q.r/4,q.r,q.r/2); x.restore(); });
+      if(t<90){ requestAnimationFrame(boucle); } else { x.clearRect(0,0,w,h); }
+    })();
+  }
+
+  // État de la partie
+  var etat={score:0,serie:0,meilleure:0,tour:0,total:0,resultats:[]};
+  function chips(){
+    var s=document.getElementById("score"), f=document.getElementById("serie");
+    if(s){ s.textContent=etat.score+" pts"; }
+    if(f){ f.textContent="🔥 "+etat.serie; f.parentNode.hidden=etat.serie<2; }
+  }
+  function pop(id){ var el=document.getElementById(id); if(el){ el.classList.remove("pop"); void el.offsetWidth; el.classList.add("pop"); } }
+  function barre(){
+    var b=document.getElementById("barre"); if(!b){ return; }
+    var h=""; for(var i=0;i<etat.total;i++){ var r=etat.resultats[i]; h+='<i class="'+(r===true?"bon":r===false?"faux":i===etat.tour?"ici":"")+'"></i>'; }
+    b.innerHTML=h;
+  }
+  function depart(total){ etat={score:0,serie:0,meilleure:0,tour:0,total:total,resultats:[]}; chips(); barre(); }
+  function reponse(juste,points){
+    etat.resultats[etat.tour]=juste;
+    if(juste){ etat.serie++; etat.meilleure=Math.max(etat.meilleure,etat.serie); etat.score+=points+(etat.serie>=3?5:0); confettis(etat.serie>=3?90:45); vibre(30); pop("score"); }
+    else{ etat.serie=0; vibre([60,40,60]); }
+    chips(); barre();
+  }
+  function suivant(){ etat.tour++; barre(); }
+
+  // Écran de fin : score, étoiles, puis l'appel vers le test
+  function fin(o){
+    var bons=etat.resultats.filter(function(r){return r===true;}).length, ratio=bons/etat.total;
+    var et=ratio>=.99?"⭐⭐⭐":ratio>=.6?"⭐⭐☆":ratio>0?"⭐☆☆":"☆☆☆";
+    var mot=ratio>=.99?o.mots[0]:ratio>=.6?o.mots[1]:o.mots[2];
+    var h='<div class="ecran"><div class="carte fin-score"><p class="num">'+esc(o.surScore)+'</p><p class="gros">'+bons+'/'+etat.total+'</p>'+
+      '<p class="etoiles" aria-label="'+bons+' bonnes réponses sur '+etat.total+'">'+et+'</p><p class="mot">'+esc(mot)+'</p>'+
+      '<p class="num" style="margin-top:6px">'+etat.score+' points'+(etat.meilleure>=3?' · série de '+etat.meilleure+' 🔥':'')+'</p></div>'+
+      '<div class="cta">'+urgence()+'<h3>'+esc(o.ctaTitre)+'</h3><p>'+esc(o.ctaTexte)+'</p>'+
+      '<a href="'+lienTest(o.campagne,o.contenu)+'">'+esc(o.ctaBouton)+' <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h11M10.5 5l5 5-5 5"/></svg></a>'+
+      '<p class="mention">Test gratuit proposé par kursiko.com · accès par un code envoyé par e-mail</p></div>'+
+      '<div class="lien-bas"><button type="button" id="rejouer">Rejouer</button><button type="button" id="partager">Défier un ami</button></div></div>';
+    document.getElementById("scene").innerHTML=h;
+    if(ratio>=.6){ confettis(140); }
+    document.getElementById("rejouer").addEventListener("click",o.rejouer);
+    document.getElementById("partager").addEventListener("click",function(){
+      var texte=o.defi.replace("{n}",bons).replace("{t}",etat.total), url=location.origin+location.pathname;
+      if(navigator.share){ navigator.share({title:document.title,text:texte,url:url}).catch(function(){}); }
+      else{ try{ navigator.clipboard.writeText(texte+" "+url); this.textContent="Lien copié ✓"; }catch(e){} }
+    });
+    var t=document.querySelector(".gros"); if(t){ t.setAttribute("tabindex","-1"); t.focus({preventScroll:true}); }
+    barre();
+  }
+
+  return {bandeau:bandeau,joursAvant:function(t){return Math.floor((Date.parse(t)-Date.now())/864e5);},esc:esc,melange:melange,depart:depart,reponse:reponse,suivant:suivant,fin:fin,etat:function(){return etat;},confettis:confettis};
+})();
+
+</script>
+<script>
+// Jeu 1 : vrai ou faux sur les études en Europe. Chaque réponse cite sa source officielle (rentrée 2027).
+(function(){
+  var FAITS=[
+    {q:"🇬🇧 Au Royaume-Uni, tu peux candidater à 10 formations à la fois.",v:false,e:"Faux : sur UCAS, c'est 5 choix maximum. Date limite : 13 janvier 2027 à 18 h.",s:["UCAS","https://www.ucas.com/applying/applying-to-university/filling-in-your-ucas-application"]},
+    {q:"🇫🇮 En Finlande, les candidatures en anglais ne durent que deux semaines.",v:true,e:"Vrai : sur Studyinfo, c'est du 7 au 21 janvier 2027. Pas une de plus.",s:["Studyinfo","https://opintopolku.fi/konfo/en/sivu/joint-application-to-higher-education"]},
+    {q:"🇧🇪 En Belgique, tout passe par un grand portail national.",v:false,e:"Faux : il n'y a pas de portail national. Tu candidates auprès de chaque école.",s:["Mes études","https://www.mesetudes.be/commencer-des-etudes/comment-minscrire/quelle-est-la-date-limite-pour-minscrire"]},
+    {q:"🇮🇪 En Irlande, tu classes tes choix par ordre de préférence.",v:true,e:"Vrai : sur le CAO, ouvert depuis le 5 novembre 2026, jusqu'au 1er février 2027 à 17 h.",s:["CAO","https://www.cao.ie/"]},
+    {q:"🇳🇱 Aux Pays-Bas, pour la plupart des formations, tu as jusqu'au 1er mai.",v:true,e:"Vrai : 1er mai 2027 sur Studielink. Mais attention : 15 janvier pour les formations à places limitées.",s:["Gouvernement néerlandais","https://www.rijksoverheid.nl/vraag-en-antwoord/hoger-onderwijs/deadline-aanmelden-opleiding-hogeschool-of-universiteit"]},
+    {q:"🇪🇸 En Espagne, tout le monde candidate sur un seul portail national.",v:false,e:"Faux : tu candidates sur le portail de la région de l'école. UNEDasiss sert seulement à faire reconnaître tes notes.",s:["UNEDasiss","https://unedasiss.uned.es/publico_destino"]},
+    {q:"🇩🇰 Au Danemark, le portail ferme le 15 mars à midi.",v:true,e:"Vrai : sur optagelse.dk, du 1er février au 15 mars 2027 à midi, pour un diplôme non danois.",s:["optagelse.dk","https://optagelse.dk/higher-education.shtml"]}
+  ];
+  var N=6, serie=[], scene=document.getElementById("scene");
+
+  function accueil(){
+    scene.innerHTML='<div class="ecran"><div class="carte"><p class="grand">6 affirmations sur les études en Europe. Vrai ou faux ?</p>'+
+      '<p class="num" style="margin-top:8px">+10 points par bonne réponse, bonus à partir de 3 d\'affilée 🔥</p>'+
+      '<div class="btns"><button type="button" class="btn suivant" id="go">C\'est parti</button></div></div></div>';
+    document.getElementById("go").addEventListener("click",partie);
+  }
+  function partie(){ serie=Jeu.melange(FAITS).slice(0,N); Jeu.depart(N); tour(0); }
+  function tour(i){
+    var f=serie[i];
+    scene.innerHTML='<div class="ecran"><div class="carte" id="carte"><p class="num">'+(i+1)+' sur '+N+'</p><p class="grand">'+Jeu.esc(f.q)+'</p>'+
+      '<div class="btns deux"><button type="button" class="btn" data-r="1"><span class="emo" aria-hidden="true">👍</span>Vrai</button><button type="button" class="btn" data-r="0"><span class="emo" aria-hidden="true">👎</span>Faux</button></div><div id="suite"></div></div></div>';
+    scene.querySelectorAll("[data-r]").forEach(function(b){ b.addEventListener("click",function(){
+      var dit=b.getAttribute("data-r")==="1", juste=dit===f.v;
+      scene.querySelectorAll("[data-r]").forEach(function(x){ x.disabled=true; if((x.getAttribute("data-r")==="1")===f.v){ x.classList.add("bon"); } else if(x===b){ x.classList.add("faux"); } });
+      Jeu.reponse(juste,10);
+      if(!juste){ document.getElementById("carte").classList.add("secoue"); }
+      document.getElementById("suite").innerHTML='<div class="verdict '+(juste?"bon":"faux")+'"><b>'+(juste?"Bien vu !":"Raté !")+'</b>'+Jeu.esc(f.e)+
+        '<br><a class="src" href="'+f.s[1]+'" target="_blank" rel="noopener">Source : '+Jeu.esc(f.s[0])+'</a></div>'+
+        '<button type="button" class="btn suivant" id="next">'+(i<N-1?"Suivant":"Voir mon score")+'</button>';
+      var n=document.getElementById("next"); n.focus({preventScroll:true});
+      n.addEventListener("click",function(){ Jeu.suivant(); i<N-1?tour(i+1):fin(); });
+    }); });
+  }
+  function fin(){
+    Jeu.fin({surScore:"Ton score",mots:["Sans faute, tu es prêt·e à partir !","Pas mal du tout !","Il y a encore des choses à découvrir…"],
+      ctaTitre:"Prochaine étape : tes écoles à toi",ctaTexte:"Un test de 10 minutes classe les écoles d'Europe selon tes réponses, avec leurs dates limites.",
+      ctaBouton:"Trouver mes écoles",campagne:"jeu-vrai-faux",defi:"J'ai fait {n}/{t} au vrai ou faux des études en Europe. Tu fais mieux ?",rejouer:partie});
+  }
+  Jeu.depart(N); accueil();
+})();
+
+Jeu.bandeau();
+</script>
+</body>
+</html>

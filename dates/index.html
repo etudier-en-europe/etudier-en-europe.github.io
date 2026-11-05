@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1F1D1A">
+<title>Études en Europe : ça ferme plus tôt que tu crois</title>
+<meta name="description" content="Les candidatures pour la rentrée 2027 ferment dès janvier. Trouve tes écoles et leurs dates.">
+<meta property="og:title" content="Études en Europe : ça ferme plus tôt que tu crois">
+<meta property="og:description" content="Les candidatures pour la rentrée 2027 ferment dès janvier. Trouve tes écoles et leurs dates.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23D4FF3A'/%3E%3Ctext x='50' y='70' font-size='60' text-anchor='middle'%3E%E2%8F%B3%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Inter:wght@500;600;700;800&display=swap">
+<style>
+:root{--encre:#1F1D1A;--encre-2:#5C574F;--lime:#D4FF3A;--rose:#FF5FA2;--violet:#6C4BFF}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{min-height:100dvh;display:flex;flex-direction:column;color:var(--encre);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+  background:radial-gradient(circle at 95% 8%,rgba(255,95,162,.25) 0 110px,transparent 250px),radial-gradient(circle at 0% 60%,rgba(108,75,255,.18) 0 110px,transparent 240px),#FFF8F0}
+:focus-visible{outline:3px solid var(--violet);outline-offset:3px}
+.alerte{margin:0;padding:calc(8px + env(safe-area-inset-top,0px)) 14px 8px;background:var(--encre);color:var(--lime);font-size:14px;font-weight:700;text-align:center;line-height:1.35}
+.alerte b{color:#fff;font-variant-numeric:tabular-nums}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;width:100%;max-width:480px;margin:0 auto;padding:20px max(16px,env(safe-area-inset-left,0px)) calc(24px + env(safe-area-inset-bottom,0px))}
+.etiquette{align-self:flex-start;margin:0;padding:5px 12px;border-radius:999px;background:var(--violet);color:#fff;font-size:14px;font-weight:800;transform:rotate(-2deg)}
+h1{margin:14px 0 0;font-family:"Bricolage Grotesque",Inter,sans-serif;font-weight:800;font-size:clamp(34px,10vw,48px);line-height:1;letter-spacing:-.025em;text-wrap:balance}
+h1 mark{background:linear-gradient(transparent 52%,var(--lime) 52%);color:inherit;padding:0 2px}
+.liste{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.liste li{display:flex;align-items:center;gap:12px;padding:12px 14px;background:#fff;border:2px solid var(--encre);border-radius:16px;box-shadow:0 3px 0 var(--encre);font-size:17px;font-weight:700}
+.liste span{font-size:24px;line-height:1}
+.bouton{display:flex;align-items:center;justify-content:center;gap:10px;min-height:64px;margin-top:22px;padding:16px 22px;border:2px solid var(--encre);border-radius:999px;background:var(--lime);color:var(--encre);
+  font-weight:800;font-size:20px;text-decoration:none;box-shadow:0 5px 0 var(--encre);animation:appel 2.2s ease-in-out 1s infinite}
+.bouton:active{transform:translateY(3px);box-shadow:0 2px 0 var(--encre)}
+@keyframes appel{0%,100%{transform:none}8%{transform:scale(1.04)}16%{transform:none}}
+.mention{margin:12px 0 0;text-align:center;font-size:14px;font-weight:600;color:var(--encre-2)}
+@media (prefers-reduced-motion:reduce){.bouton{animation:none}}
+</style>
+</head>
+<body>
+<p class="alerte" id="alerte" aria-live="off"></p>
+<main>
+  <p class="etiquette">Rentrée 2027 ⏳</p>
+  <h1>Ça ferme <mark>plus tôt que tu crois</mark> 😭</h1>
+  <ul class="liste"><li><span aria-hidden="true">🇬🇧</span>Royaume-Uni : 13 janvier 2027</li><li><span aria-hidden="true">🇳🇱</span>Pays-Bas : 15 janvier 2027 (places limitées)</li><li><span aria-hidden="true">🇮🇪</span>Irlande : 1er février 2027</li></ul>
+  <a class="bouton" id="cta" href="https://kursiko.com/test">Mes écoles + leurs dates ⏳</a>
+  <p class="mention">Gratuit · 10 min · proposé par kursiko.com · accès par un code envoyé par e-mail</p>
+</main>
+<script>
+(function(){
+  // Prochaine vraie date limite (rentrée 2027) ; début de journée si l'heure officielle est inconnue
+  var E=[["Les candidatures au Royaume-Uni (UCAS)","2027-01-13T18:00:00Z","13 janvier"],["Les formations à places limitées aux Pays-Bas","2027-01-14T23:00:00Z","15 janvier"],
+    ["Les candidatures en anglais en Finlande","2027-01-20T22:00:00Z","21 janvier"],["Les candidatures en Irlande (CAO)","2027-02-01T17:00:00Z","1er février"],
+    ["Les candidatures au Danemark","2027-03-15T11:00:00Z","15 mars"],["Les candidatures aux Pays-Bas","2027-04-30T22:00:00Z","1er mai"]];
+  var el=document.getElementById("alerte"), e=null;
+  for(var i=0;i<E.length;i++){ if(Date.parse(E[i][1])>Date.now()){ e=E[i]; break; } }
+  if(!e){ el.hidden=true; } else {
+    var calme=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var maj=function(){ var s=Math.max(0,Math.floor((Date.parse(e[1])-Date.now())/1000)), d=function(v){return (v<10?"0":"")+v;};
+      el.innerHTML="⏳ "+e[0]+" ferment le "+e[2]+" : <b>"+Math.floor(s/86400)+" j "+d(Math.floor(s%86400/3600))+" h "+d(Math.floor(s%3600/60))+" min "+d(s%60)+" s</b>"; };
+    maj(); if(!calme){ setInterval(maj,1000); }
+  }
+  // Suivi : ?c=nom-du-compte part avec le visiteur jusqu'au test
+  var c=""; try{ c=(new URLSearchParams(location.search).get("c")||"").toLowerCase().replace(/[^a-z0-9_-]/g,"").slice(0,40); }catch(x){}
+  var u=new URL("https://kursiko.com/test"); u.searchParams.set("utm_source",c||"direct"); u.searchParams.set("utm_medium","social"); u.searchParams.set("utm_campaign","direct-dates");
+  document.getElementById("cta").href=u.toString();
+})();
+</script>
+</body>
+</html>
